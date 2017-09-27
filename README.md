@@ -1,2 +1,4 @@
-# projet_symfony_OCR
-Activité symfony 3 OCR depuis zero
+symf
+====
+
+A Symfony project created on September 27, 2017, 8:57 pm.
