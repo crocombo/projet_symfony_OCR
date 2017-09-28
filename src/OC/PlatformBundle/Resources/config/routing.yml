@@ -23,7 +23,3 @@ next_page2:
     path:     /next2
     defaults: { _controller: OCPlatformBundle:Next:test }
 
-
-next_page3:
-    path:     /next3
-    defaults: { _controller: OCPlatformBundle:Next:porsche }

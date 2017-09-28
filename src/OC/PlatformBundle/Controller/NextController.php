@@ -37,24 +37,4 @@ class NextController extends Controller
 	}
 
 
-
-	#permet d'afficher page /next3
-	public function porscheAction()
-	{
-	$content = $this->get('templating')->render('OCPlatformBundle:Next:index3.html.twig', array(
-		'nom' => 'Cro',
-		'prenom' => 'Combo'
-	))
-	;
-
-	return new Response($content);
-	}
-
-
-
-
-
-
-
-
 }

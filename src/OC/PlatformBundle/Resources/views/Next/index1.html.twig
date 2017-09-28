@@ -41,6 +41,7 @@
 	<div class="me-content">
 		
 		<div class="logo">
+
 			
 			<img src="https://demo.onepagelove.com/fullsingle-html/me/images/logo.png" alt="Logo" />
 
@@ -49,7 +50,12 @@
 		<div class="bio">
 			
 			<p>This is me. I push pixels at <a href="#">Google</a>, write words on <a href="#">Medium</a> and spill thoughts on <a href="#">Twitter</a>.</p>
-
+		
+			<p>
+				<ul>
+					<li {% if app.request.attributes.get('_route') == 'oc_platform_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_platform_homepage') }}">=> Home <=</a></li>
+				</ul>
+			</p>
 		</div>
 
 		<div class="network">

@@ -20,14 +20,15 @@
 	<!--menu-->
 	<div class="container nav">
 		<nav class="animated fadeIn">
-			<div class="logo">Amari</div>
+			<!--<div class="logo">Test</div>-->
 			<ul class="centernav">
-				<li class="smoothscroll"><a href="#portfolio">Work</a></li>
-				<li class="smoothscroll"><a href="#about">About</a></li>
+				<li {% if app.request.attributes.get('_route') == 'oc_platform_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_platform_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Home</a></li>
+				<!--<li class="smoothscroll"><a href="#portfolio">Work</a></li>-->
+				<!--<li class="smoothscroll"><a href="#about">About</a></li>-->
 			</ul>
-			<ul class="sidenav">
+<!--			<ul class="sidenav">
 				<li><a href="resume.pdf" target="_blank">Résumé</a> </li>
-			</ul>
+			</ul> -->
 		</nav>
 	</div>
 	<!--/menu-->
@@ -67,6 +68,7 @@
 				</div>
 				<div class="bottom-footer">
 					<ul>
+						<li {% if app.request.attributes.get('_route') == 'oc_platform_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_platform_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Home</a></li>
 						<li><a href="https://twitter.com/" target="_blank" title="Twitter" ><i class="fa fa-twitter"></i></a></li>
 						<li><a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
 						<li><a href="http://iconosquare.com/" target="_blank" title="Instagram" ><i class="fa fa-instagram"></i></a></li>
