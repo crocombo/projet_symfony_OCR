@@ -6,12 +6,24 @@ oc_platform_homepage:
     defaults: { _controller: OCPlatformBundle:Default:index }
 
 
+
 hello_the_world:
     path:     /hello-world
     defaults: { _controller: OCPlatformBundle:Advert:index }
 
 
 
-next_world:
-    path:     /next
+next_page1:
+    path:     /next1
     defaults: { _controller: OCPlatformBundle:Next:index }
+
+
+
+next_page2:
+    path:     /next2
+    defaults: { _controller: OCPlatformBundle:Next:test }
+
+
+next_page3:
+    path:     /next3
+    defaults: { _controller: OCPlatformBundle:Next:porsche }
