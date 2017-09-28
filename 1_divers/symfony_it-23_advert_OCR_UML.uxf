@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>567</x>
+      <y>333</y>
+      <w>189</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>OC_advert
+--
+idPrimaire : int(11)
+image_idIndex : int(11)
+date : datetime
+titleIndex : varchar(255)
+author : varchar(255)
+content : varchar(255)
+published : tinyint(1) 
+updated_at : datetime
+nb_applications : int(11)
+slugIndex
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>738</y>
+      <w>189</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>OC_skill
+--
+id : int(11)
+name : varchar(255)
+
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>333</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>OC_advert_category
+--
+advert_idIndex : int(11)
+category_idPrimaireIndex : int(11)
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>450</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>OC_advert_skill
+--
+id : int(11)
+advert_idIndex : int(11)
+skill_idIndex 	int(11)
+level : varchar(255) 	
+
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>189</y>
+      <w>189</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>OC_category
+--
+id : int(11)
+name : varchar(255)
+
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>387</y>
+      <w>189</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>OC_image
+--
+id : int(11)
+url : varchar(255)
+alt :varchar(255)
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>18</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>OC_user
+--
+id : int
+username : varchar(255)
+email 	varchar(255)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>567</x>
+      <y>18</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>OC_application
+--
+id : int(11)
+advert_idIndex : int(11)
+author : varchar(255)
+content : longtext
+date : datetime
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>477</y>
+      <w>261</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>558</y>
+      <w>27</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>747</x>
+      <y>414</y>
+      <w>279</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>126</y>
+      <w>27</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>351</y>
+      <w>270</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>252</y>
+      <w>27</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+</diagram>
