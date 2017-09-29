@@ -1,25 +1,32 @@
 # src/OC/PlatformBundle/Resources/config/routing.yml
-
-
-oc_platform_homepage:
+oc_platform_CroCombo:
     path:     /
-    defaults: { _controller: OCPlatformBundle:Default:index }
+    defaults: { _controller: OCPlatformBundle:Advert:test }
 
 
 
-hello_the_world:
-    path:     /hello-world
+oc_platform_home:
+    path:      /
     defaults: { _controller: OCPlatformBundle:Advert:index }
 
 
-
-next_page1:
-    path:     /next1
-    defaults: { _controller: OCPlatformBundle:Next:index }
-
+oc_platform_view:
+    path:      /advert/{id}
+    defaults: { _controller: OCPlatformBundle:Advert:view }
 
 
-next_page2:
-    path:     /next2
-    defaults: { _controller: OCPlatformBundle:Next:test }
+oc_platform_add:
+    path:      /add
+    defaults: { _controller: OCPlatformBundle:Advert:add }
 
+
+oc_platform_view_slug:
+    path:      /{year}/{slug}.{format}
+    defaults: 
+        _controller: OCPlatformBundle:Advert:viewSlug
+        format:     html
+#   defaults: { _controller: OCPlatformBundle:Advert:viewSlug, format: html }  # permet d'ajouter la possibilité pour{format}de ne pas être renseigné elle est donc par "default" et peut s'ecrire sur une ligne
+    requirements:
+        year:   \d{4}
+        format: html|xml|buz
+        _locale: fr
