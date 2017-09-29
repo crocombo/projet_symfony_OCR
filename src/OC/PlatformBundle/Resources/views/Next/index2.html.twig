@@ -22,7 +22,10 @@
 		<nav class="animated fadeIn">
 			<!--<div class="logo">Test</div>-->
 			<ul class="centernav">
-				<li {% if app.request.attributes.get('_route') == 'oc_platform_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_platform_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Home</a></li>
+					<li {% if app.request.attributes.get('_route') == 'oc_platform_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_platform_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Home</a></li>
+					<li {% if app.request.attributes.get('_route') == 'hello_the_world'  %}class="active"{% endif %}><a href="{{ path('hello_the_world') }}"><span class="navbarCoulor">Hello Perso</a></li>
+					<li {% if app.request.attributes.get('_route') == 'next_page1'  %}class="active"{% endif %}><a href="{{ path('next_page1') }}"><span class="navbarCoulor">Page1</a></li>
+
 				<!--<li class="smoothscroll"><a href="#portfolio">Work</a></li>-->
 				<!--<li class="smoothscroll"><a href="#about">About</a></li>-->
 			</ul>
@@ -36,10 +39,10 @@
 	<div class="container">
 		<header class="header" data-top="margin-bottom:150px; opacity:1;" data-top-bottom="margin-bottom:250px; opacity:0;">
 			<h1  class="animated fadeIn">
-			Digital Designer from Australia. I do UI &amp; UX design, websites as well as branding &amp; front end development.
+<!--			Digital Designer from Australia. I do UI &amp; UX design, websites as well as branding &amp; front end development.-->
 			</h1>
 			<div class="work-line animated fadeInUp">
-				<div class="vertcial-line" data-top=" opacity:1;" data-top-bottom=" opacity:0;  " data-anchor-target="header"></div>
+<!--				<div class="vertcial-line" data-top=" opacity:1;" data-top-bottom=" opacity:0;  " data-anchor-target="header"></div>-->
 				<h4 data-top=" opacity:1;" data-top-bottom=" opacity:0;" data-anchor-target="header"> See My Work</h4>
 			</div>
 		</header>
