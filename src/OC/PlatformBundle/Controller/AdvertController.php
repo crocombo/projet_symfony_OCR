@@ -14,90 +14,104 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;      // Cette use
 class AdvertController extends Controller
 {
 
-    # Action index -------------------------
-    public function indexAction()
+
+///////////////////////////////////////////////////////////////////////////////////////  INDEX
+    public function indexAction($page)
     {
-        $content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig', array(
-            'nom' => 'Cro',
-            'prenom' => 'Combo'
-        ))
-        ;
-        return new Response($content);
+        // On ne sait pas combien de pages il y a
+        // Mais on sait qu'une page doit être supérieure ou égale à 1
+        if ($page < 1) {
+          // On déclenche une exception NotFoundHttpException, cela va afficher
+          // une page d'erreur 404 (qu'on pourra personnaliser plus tard d'ailleurs)
+          throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
+        }
+
+        // Ici, on récupérera la liste des annonces, puis on la passera au template
+
+        // Mais pour l'instant, on ne fait qu'appeler le template
+        return $this->render('OCPlatformBundle:Advert:index.html.twig');
     }
 
 
 
-
-
-
-
-
-
-
-
-    # Action view -------------------------
-    public function viewAction($id, Request $request)                                           // Recupere $id et donne accès à la requête HTTP via $request donc on injecte la requête dans les arguments de la méthode
+///////////////////////////////////////////////////////////////////////////////////////  VIEW
+    public function viewAction($id)
     {
-        ########################## DECLARATION VAR
-#        $response = new Response(json_encode(array('id' => $id)));                              // Créons nous-mêmes la réponse en JSON, grâce à la fonction json_encode()
+        // Ici, on récupérera l'annonce correspondante à l'id $id
 
-#        $url = $this->get('router')->generate('oc_platform_home');                              // $url recoit oc_platform_home (voir le return avec RedirectResponse plus bas...)
-
-#        $tag = $request->query->get('tag');                                                     // Récupère paramètre tag
-
-        ########################## AFFICHAGE
-        # Affichage sans template twig
-#       return new Response("Affichage de l'annonce d'id => ".$id." avec le tag : ".$tag);      // Tester avec : http://localhost/projet_symfony_OCR/web/app_dev.php/platform/advert/100?tag=toze; Besoin d'ajouter ce: use Symfony\Component\HttpFoundation\Request;
-
-        # Affichage avec template twig dont response incluse
-#       return $this->get('templating')->renderResponse('OCPlatformBundle:Advert:view.html.twig', array('id'  => $id, 'tag' => $tag)
-
-        # Affichage avec template twig dont response incluse & simplifié:
-#       return $this->render('OCPlatformBundle:Advert:view.html.twig', array('id' => $id, 'tag' => $tag));
-
-
-        ########################## REDIRECTION
-        # Redirection methode 1 (longue):
-#       return new RedirectResponse($url);                                                     // permet de rediriger vers $url (oc_platform_home); Besoin d'ajouter ce: use Symfony\Component\HttpFoundation\Response;
-
-        # Redirection methode 2 (courte):
-#       return $this->redirect($url);                                                           // permet de rediriger vers $url (oc_platform_home); Besoin d'ajouter ce: use Symfony\Component\HttpFoundation\Response;
-
-        # Redirection methode 3 (sans $url mais avec le nom de la route):
-#       return $this->redirectToRoute('oc_platform_CroCombo');                                  // permet de rediriger sans $url (oc_platform_CroCombo); Besoin d'ajouter ce: use Symfony\Component\HttpFoundation\RedirectResponse;
-
-
-        ########################## CHANGER Content-type http
-        # Methode 1 (longue):
-#        $response->headers->set('Content-Type', 'application/json');                            // Ici, nous définissons le Content-type pour dire au navigateur que l'on renvoie du JSON et non du HTML
-#        return $response;
-
-        # Methode 2 (courte):
-#        return new JsonResponse(array('id' => $id));                                            // Besoin d'ajouter ce: use Symfony\Component\HttpFoundation\JsonResponse;
-
-        return $this->render('OCPlatformBundle:Advert:view.html.twig', array('id' => $id));
+        return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+          'id' => $id
+        ));
     }
 
 
 
-
-
-
-
-     # Action add (FlashBag)
+///////////////////////////////////////////////////////////////////////////////////////  ADD
     public function addAction(Request $request)
     {
-        $session = $request->getSession();
-        $session->getFlashBag()->add('info', 'Annonce bien enregistrée');                       // Bien sûr, cette méthode devra réellement ajouter l'annonce. Mais faisons comme si c'était le cas
-        $session->getFlashBag()->add('info', 'Oui oui, elle est bien enregistrée !');           // Le « flashBag » est ce qui contient les messages flash dans la session Il peut bien sûr contenir plusieurs messages :
-        $session->getFlashBag()->add('info', 'je confirme  !');           // Le « flashBag » est ce qui contient les messages flash dans la session Il peut bien sûr contenir plusieurs messages :
+        // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
 
-        return $this->redirectToRoute('oc_platform_view', array('id' => 500));                    // Puis on redirige vers la page de visualisation de cette annonce
+        // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
+        if ($request->isMethod('POST')) {
+          // Ici, on s'occupera de la création et de la gestion du formulaire
+
+          $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+          // Puis on redirige vers la page de visualisation de cettte annonce
+          return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+        }
+
+        // Si on n'est pas en POST, alors on affiche le formulaire
+        return $this->render('OCPlatformBundle:Advert:add.html.twig');
     }
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////  EDIT
+    public function editAction($id, Request $request)
+    {
+        // Ici, on récupérera l'annonce correspondante à $id
 
+        // Même mécanisme que pour l'ajout
+        if ($request->isMethod('POST')) {
+          $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+
+          return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+        }
+
+        return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+    }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////  DELETE
+public function deleteAction($id)
+{
+    // Ici, on récupérera l'annonce correspondant à $id
+
+    // Ici, on gérera la suppression de l'annonce en question
+
+    return $this->render('OCPlatformBundle:Advert:delete.html.twig');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////      TEST PERSO
 
 
     # Action test -------------------------
@@ -110,8 +124,6 @@ class AdvertController extends Controller
     ;
     return new Response($content);
     }
-
-
 
 
 
@@ -129,14 +141,11 @@ class AdvertController extends Controller
 
 
 
-
     # Action viewSlug -------------------------
     public function viewSlugAction($slug, $year, $format)
     {
         return new Response("On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$format.".");
     }
-
-
 
 
 
@@ -160,8 +169,6 @@ class AdvertController extends Controller
 
 
 
-
-
     # test page avec response
     public function testResponseAction($id)
     {
@@ -170,18 +177,6 @@ class AdvertController extends Controller
        $response->setStatusCode(Response::HTTP_NOT_FOUND);              // On définit le code HTTP à « Not Found » (erreur 404)
        return $response;// On retourne la réponse
   }
-
-
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
