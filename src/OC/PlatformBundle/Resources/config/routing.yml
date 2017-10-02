@@ -49,6 +49,14 @@ oc_platform_delete:
 ###############################################################
 #     AUTRES ROUTES
 ###############################################################
+
+# Page session:
+oc_platform_session:
+    path:      /session/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:session
+
+###############################################################
 # Page custom test:
 oc_platform_CroCombo:
     path:     /croco
@@ -80,7 +88,13 @@ oc_platform_myRoute:
 #Le paramètre {_controller} Cette valeur que nous avons toujours mise dans le tableau defaults n'est rien d'autre qu'un paramètre de route ! Évidemment, c'est un paramètre que nous ne mettons jamais dans le path de nos routes, mais je tenais à vous montrer qu'il n'est pas différent des autres. Le tableau defaults correspond juste aux valeurs par défaut de nos paramètres, qu'ils soient ou non présent dans lepath  de la route.
 ###############################################################
 
-
+# Page de visualisation testResponse:
+oc_platform_response:
+    path:      /advert/response/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:testResponse
+    requirements:
+        id: \d+
 
 
 
