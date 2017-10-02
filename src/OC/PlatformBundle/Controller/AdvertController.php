@@ -7,10 +7,12 @@ namespace OC\PlatformBundle\Controller;
 // N'oubliez pas ce use :
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class AdvertController extends Controller
 {
-    # Custom page test ****************
+    # Action test -------------------------
     public function testAction()
     {
         $content = $this->get('templating')->render('OCPlatformBundle:Advert:index_test.html.twig', array(
@@ -18,12 +20,11 @@ class AdvertController extends Controller
             'prenom' => 'Combo'
         ))
     ;
-
     return new Response($content);
     }
 
 
-    # Page index **********************
+    # Action index -------------------------
     public function indexAction()
     {
         $content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig', array(
@@ -31,35 +32,39 @@ class AdvertController extends Controller
             'prenom' => 'Combo'
         ))
         ;
-
         return new Response($content);
     }
 
 
-    # Page view ***********************
+    # Action view -------------------------
     public function viewAction($id)
     {
         return new Response("Affichage de l'annonce d'id => ".$id);
     }
 
 
-    # Page view ***********************
+    # Action viewSlug -------------------------
     public function viewSlugAction($slug, $year, $format)
     {
         return new Response("On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$format.".");
     }
 
 
-    public function indexAction()
+    # Action myRoute -------------------------
+    public function myRouteAction($id)                // Générer une URL prête à être utilisée, dans notre cas de l'annonce d'id 5 : 
     {
         // On veut avoir l'URL de l'annonce d'id 5.
         $url = $this->get('router')->generate(
-            'oc_platform_view', // 1er argument : le nom de la route
-            array('id' => 5)    // 2e argument : les valeurs des paramètres
+            'oc_platform_myRoute',                // 1e argument : le nom de la route
+            array('id' => $id),                     // 2e argument : les valeurs des paramètres                                         // /projet_symfony_OCR/web/app_dev.php/platform/myRoute/5     /myRoute/5
+            UrlGeneratorInterface::ABSOLUTE_URL   // 3e argument : générer une URL absolue (ex : pour envoyez un e-mail par exemple)  // http://localhost/projet_symfony_OCR/web/app_dev.php/platform
         );
-        // $url vaut « /platform/advert/5 »
-        
-        return new Response("L'URL de l'annonce d'id 5 est : ".$url);
+       // Méthode longue : $url = $this->get('router')->generate('oc_platform_home');
+       // Méthode courte : $url = $this->generateUrl('oc_platform_home');
+
+       // $url vaut « /platform/advert/5 »
+        return new Response("L'URL de l'annonce d'id ".$id." est : <br>".$url);
+
     }
 
 

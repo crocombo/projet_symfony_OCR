@@ -17,9 +17,24 @@
            </p>
            <b/>
            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
            </p>
+			<hr>
+			<!--Générer une URL depuis les vues. (fonction path)-->
+			<p>Générer une URL depuis les vues. (fonction path):</p>
+
+				<a href="{{ path('oc_platform_CroCombo') }}">
+					Lien vers la custom Page Croco :
+				</a>
+
+			<p>Pour générer une URL absolue depuis Twig, on utilise la fonction url()au lieu de path(). <br>
+				Elle s'utilise exactement de la même manière, seul le nom change. <br>Voilà : vous savez générer des URL, 
+				ce n'était vraiment pas compliqué. Pensez bien à utiliser la fonction pour tous vos liens depuis vos templates
+			</p>
         </div>
      </div>
   </header>

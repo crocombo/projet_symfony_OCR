@@ -1,32 +1,87 @@
 # src/OC/PlatformBundle/Resources/config/routing.yml
+
+
+# Page d'accueil:
+oc_platform_home:
+    path:      /{page}
+    defaults:
+        _controller: OCPlatformBundle:Advert:index
+        page:        1
+    requirements:
+        page: \d*
+
+
+# Page de visualisation d'une annonce:
+oc_platform_view:
+    path:      /advert/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:view
+    requirements:
+        id: \d+
+
+
+# Page ajout:
+oc_platform_add:
+    path:      /add
+    defaults:
+        _controller: OCPlatformBundle:Advert:add
+
+
+# Page  modification:
+oc_platform_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+
+# Page suppression:
+oc_platform_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:delete
+    requirements:
+        id: \d+
+
+
+
+###############################################################
+#     AUTRES ROUTES
+###############################################################
+# Page custom test:
 oc_platform_CroCombo:
-    path:     /
+    path:     /croco
     defaults: { _controller: OCPlatformBundle:Advert:test }
 
 
-
-oc_platform_home:
-    path:      /
-    defaults: { _controller: OCPlatformBundle:Advert:index }
-
-
-oc_platform_view:
-    path:      /advert/{id}
-    defaults: { _controller: OCPlatformBundle:Advert:view }
-
-
-oc_platform_add:
-    path:      /add
-    defaults: { _controller: OCPlatformBundle:Advert:add }
-
-
+###############################################################
 oc_platform_view_slug:
     path:      /{year}/{slug}.{format}
     defaults: 
         _controller: OCPlatformBundle:Advert:viewSlug
         format:     html
-#   defaults: { _controller: OCPlatformBundle:Advert:viewSlug, format: html }  # permet d'ajouter la possibilité pour{format}de ne pas être renseigné elle est donc par "default" et peut s'ecrire sur une ligne
     requirements:
         year:   \d{4}
         format: html|xml|buz
         _locale: fr
+
+oc_platform_myRoute:
+    path:      /myRoute/{id}
+    defaults: { _controller: OCPlatformBundle:Advert:myRoute }
+
+
+#   defaults: { _controller: OCPlatformBundle:Advert:viewSlug, format: html }  # permet d'ajouter la possibilité pour{format}de ne pas être renseigné elle est donc par "default" et peut s'ecrire sur une ligne
+
+#Le paramètre {_format} Lorsqu'il est utilisé , (ajoutez juste un underscore), alors un header avec leContent-typecorrespondant est ajouté à la réponse retournée
+
+#Le paramètre {_locale} Lorsqu'il est utilisé, il définit la langue dans laquelle l'utilisateur souhaite obtenir la page. Ainsi, si vous avez défini des fichiers de traduction ou si vous employez des bundles qui en utilisent, alors les traductions dans la langue du paramètre{_locale}seront chargées. Pensez à mettre unrequirements:sur la valeur de ce paramètre pour éviter que vos utilisateurs ne demandent le russe alors que votre site n'est que bilingue français-anglais.
+
+#Le paramètre {_controller} Cette valeur que nous avons toujours mise dans le tableau defaults n'est rien d'autre qu'un paramètre de route ! Évidemment, c'est un paramètre que nous ne mettons jamais dans le path de nos routes, mais je tenais à vous montrer qu'il n'est pas différent des autres. Le tableau defaults correspond juste aux valeurs par défaut de nos paramètres, qu'ils soient ou non présent dans lepath  de la route.
+###############################################################
+
+
+
+
+
+
