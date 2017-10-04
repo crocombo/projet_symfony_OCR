@@ -11,24 +11,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;                  // Methode p
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;      // Cette use donne accès à 1 méthode raccourcie pour générer des routes avec méthode generate UrlGeneratorInterface.
 
 
+
+
+
 class AdvertController extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////  MENU
-    public function menuAction($limit)
-    {
-                                                                                                            // On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
-    $listAdverts = array(
-        array('id' => 2, 'title' => 'Recherche développeur Symfony'),
-        array('id' => 5, 'title' => 'Mission de webmaster'),
-        array('id' => 9, 'title' => 'Offre de stage webdesigner')
-    );
-
-    return $this->render('OCPlatformBundle:Advert:menu.html.twig', array('listAdverts' => $listAdverts)     // Tout l'intérêt est ici : le contrôleur passe les variables nécessaires au template !
-        );
-    }
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////  INDEX
     public function indexAction()
@@ -52,14 +39,38 @@ class AdvertController extends Controller
                     'id'      => 3,
                     'author'  => 'Mathieu',
                     'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+                    'date'    => new \Datetime()),
+                array(
+                    'title'   => 'Offre divers',
+                    'id'      => 4,
+                    'author'  => 'Croco',
+                    'content' => 'Nous proposons un poste en qualité d\'integrateur web ayant de bonnes notions avec le framwork Symfony. Blabla…',
                     'date'    => new \Datetime())
         );
-
         // Et modifiez le 2nd argument pour injecter notre liste
         return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
             'listAdverts' => $listAdverts
         ));
     }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  MENU
+    public function menuAction($limit)
+    {
+       // On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
+        $listAdverts = array(
+            array('id' => 2, 'title' => 'Recherche développeur Symfony'),
+            array('id' => 5, 'title' => 'Mission de webmaster'),
+            array('id' => 9, 'title' => 'Offre de stage webdesigner'),
+            array('id' => 27, 'title' => 'Offre divers')
+        );
+        // Tout l'intérêt est ici : le contrôleur passe les variables nécessaires au template !
+        return $this->render('OCPlatformBundle:Advert:menu.html.twig', array('listAdverts' => $listAdverts) 
+        );
+    }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,11 +85,11 @@ class AdvertController extends Controller
             'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
             'date'    => new \Datetime()
         );
-
         return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
             'advert' => $advert
         ));
     }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,28 +97,25 @@ class AdvertController extends Controller
     public function addAction(Request $request)
     {
         // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
-
         // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
         if ($request->isMethod('POST')) {
-          // Ici, on s'occupera de la création et de la gestion du formulaire
 
+          // Ici, on s'occupera de la création et de la gestion du formulaire
           $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
           // Puis on redirige vers la page de visualisation de cettte annonce
           return $this->redirectToRoute('oc_platform_view', array('id' => 5));
         }
-
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('OCPlatformBundle:Advert:add.html.twig');
     }
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////  EDIT
     public function editAction($id, Request $request)
     {
-        // ...
-
         $advert = array(
             'title'   => 'Recherche développpeur Symfony',
             'id'      => $id,
@@ -115,45 +123,37 @@ class AdvertController extends Controller
             'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
             'date'    => new \Datetime()
         );
-
         return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
             'advert' => $advert
         ));
     }
 
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////  DELETE
-public function deleteAction($id)
-{
-    // Ici, on récupérera l'annonce correspondant à $id
-
-    // Ici, on gérera la suppression de l'annonce en question
-
-    return $this->render('OCPlatformBundle:Advert:delete.html.twig');
-}
+    public function deleteAction($id)
+    {
+        // Ici, on récupérera l'annonce correspondant à $id
+        // Ici, on gérera la suppression de l'annonce en question
+        return $this->render('OCPlatformBundle:Advert:delete.html.twig');
+    }
 
 
 
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
+//*********************************************                TEST PERSO                *************************************************
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
+//****************************************************************************************************************************************
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////      TEST PERSO
-
-
-    # Action test -------------------------
+    # Action test ---------------------------------------------------------------------------------------
     public function testAction()
     {
         $content = $this->get('templating')->render('OCPlatformBundle:Advert:index_test.html.twig', array(
@@ -166,8 +166,7 @@ public function deleteAction($id)
 
 
 
-
-    # Action session -------------------------
+    # Action session ---------------------------------------------------------------------------------------
     public function sessionAction($id, Request $request)
     {
         $session = $request->getSession();                                                      // Récupération de la session
@@ -179,8 +178,7 @@ public function deleteAction($id)
 
 
 
-
-    # Action viewSlug -------------------------
+    # Action viewSlug ---------------------------------------------------------------------------------------
     public function viewSlugAction($slug, $year, $format)
     {
         return new Response("On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$format.".");
@@ -188,8 +186,7 @@ public function deleteAction($id)
 
 
 
-
-    # Action myRoute -------------------------
+    # Action myRoute ---------------------------------------------------------------------------------------
     public function myRouteAction($id)                   // Générer une URL prête à être utilisée, dans notre cas de l'annonce d'id 5 : 
     {
         // On veut avoir l'URL de l'annonce d'id 5.
@@ -207,8 +204,7 @@ public function deleteAction($id)
 
 
 
-
-    # test page avec response
+    # test page avec response ---------------------------------------------------------------------------------------
     public function testResponseAction($id)
     {
     $response = new Response();                                         // On crée la réponse sans lui donner de contenu pour le moment
@@ -216,7 +212,13 @@ public function deleteAction($id)
        $response->setStatusCode(Response::HTTP_NOT_FOUND);              // On définit le code HTTP à « Not Found » (erreur 404)
        return $response;// On retourne la réponse
   }
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }
 
 

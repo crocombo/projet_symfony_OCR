@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>1</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>94</x>
+      <y>290</y>
+      <w>143</w>
+      <h>665</h>
+    </coordinates>
+    <panel_attributes>Layout GENERAL
+
+app/Resources/views/layout.html.twig
+
+--
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+  &lt;title&gt;{% block title %}OC Plateforme{% endblock %}&lt;/title&gt;
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    &lt;link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"&gt;
+  {% endblock %}
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div class="container"&gt;
+    &lt;div id="header" class="jumbotron"&gt;
+      &lt;h1&gt;Ma plateforme d'annonces&lt;/h1&gt;
+      &lt;p&gt;
+        Ce projet est propulsé par Symfony,
+        et construit grâce au MOOC OpenClassrooms et SensioLabs.
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;a class="btn btn-primary btn-lg" href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2"&gt;
+          Participer au MOOC »
+        &lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="row"&gt;
+      &lt;div id="menu" class="col-md-3"&gt;
+        &lt;h3&gt;Les annonces&lt;/h3&gt;
+        &lt;ul class="nav nav-pills nav-stacked"&gt;
+          &lt;li&gt;&lt;a href="{{ path('oc_platform_home') }}"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="{{ path('oc_platform_add') }}"&gt;Ajouter une annonce&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;h4&gt;Dernières annonces&lt;/h4&gt;
+        {{ render(controller("OCPlatformBundle:Advert:menu", {'limit': 3})) }}
+      &lt;/div&gt;
+      &lt;div id="content" class="col-md-9"&gt;
+        {% block body %}
+        {% endblock %}
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;hr&gt;
+
+    &lt;footer&gt;
+      &lt;p&gt;The sky's the limit © {{ 'now'|date('Y') }} and beyond.&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"&gt;&lt;/script&gt;
+  {% endblock %}
+
+&lt;/body&gt;
+&lt;/html&gt;
+fg=black
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>649</x>
+      <y>418</y>
+      <w>112</w>
+      <h>465</h>
+    </coordinates>
+    <panel_attributes>Layout BUNDLE 
+
+LAYOUT
+
+OC/PlatformBundle/Resources/views/layout.html.twig
+
+
+
+--
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Annonces - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+  &lt;h1&gt;Annonces&lt;/h1&gt;
+
+  &lt;hr&gt;
+
+  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  {% block ocplatform_body %}
+  {% endblock %}
+
+{% endblock %}
+fg=black
+bg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>947</x>
+      <y>806</y>
+      <w>105</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+FORM
+
+OC/PlatformBundle/Resources/views/Advert/form.html.twig
+
+--
+
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+&lt;h3&gt;Formulaire d'annonce&lt;/h3&gt;
+
+{# On laisse vide la vue pour l'instant, on la comblera plus tard lorsqu'on saura afficher un formulaire. #}
+&lt;div class="well"&gt;
+    Ici se trouvera le formulaire.
+&lt;/div&gt;
+
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>821</x>
+      <y>420</y>
+      <w>100</w>
+      <h>466</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+INDEX
+
+OC/PlatformBundle/Resources/views/Advert/index.html.twig
+
+
+--
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  &lt;h2&gt;Liste des annonces&lt;/h2&gt;
+
+  &lt;ul&gt;
+    {% for advert in listAdverts %}
+      &lt;li&gt;
+        &lt;a href="{{ path('oc_platform_view', {'id': advert.id}) }}"&gt;
+          {{ advert.title }}
+        &lt;/a&gt;
+        par {{ advert.author }},
+        le {{ advert.date|date('d/m/Y') }}
+      &lt;/li&gt;
+    {% else %}
+      &lt;li&gt;Pas (encore !) d'annonces&lt;/li&gt;
+    {% endfor %}
+  &lt;/ul&gt;
+
+{% endblock %}
+fg=black
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>947</x>
+      <y>513</y>
+      <w>105</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+ADD
+
+OC/PlatformBundle/Resources/views/Advert/add.html.twig
+
+--
+
+{# src/OC/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Ajouter une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+    &lt;h2&gt;Ajouter une annonce&lt;/h2&gt;
+
+    {{ include("OCPlatformBundle:Advert:form.html.twig") }}
+
+    &lt;p&gt;
+        Ici vous pouvez ajouter une annonce.
+    &lt;/p&gt;
+
+{#    &lt;p&gt;
+        &lt;a href="{{ path('oc_platform_view', {'id': advert.id}) }}" class="btn btn-default"&gt;
+            &lt;i class="glyphicon glyphicon-chevron-left"&gt;&lt;/i&gt;
+            Retour à l'annonce
+        &lt;/a&gt;
+    &lt;/p&gt;
+#}
+{% endblock %}
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>947</x>
+      <y>703</y>
+      <w>105</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+EDIT
+
+OC/PlatformBundle/Resources/views/Advert/edit.html.twig
+
+--
+
+{# src/OC/PlatformBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Modifier une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+    &lt;h2&gt;Modifier une annonce&lt;/h2&gt;
+
+    {{ include("OCPlatformBundle:Advert:form.html.twig") }}
+
+    &lt;p&gt;
+        Vous éditez une annonce déjà existante, merci de ne pas changer
+        l'esprit général de l'annonce déjà publiée.
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;a href="{{ path('oc_platform_view', {'id': advert.id}) }}" class="btn btn-default"&gt;
+            &lt;i class="glyphicon glyphicon-chevron-left"&gt;&lt;/i&gt;
+            Retour à l'annonce
+        &lt;/a&gt;
+    &lt;/p&gt;
+
+{% endblock %}
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>332</x>
+      <y>333</y>
+      <w>270</w>
+      <h>588</h>
+    </coordinates>
+    <panel_attributes>OC/PlatformBundle/Controller
+
+
+
+--
+
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>947</x>
+      <y>607</y>
+      <w>105</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+VIEW
+
+OC/PlatformBundle/Resources/views/Advert/view.html.twig
+
+--
+
+{# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+    &lt;h2&gt;{{ advert.title }}&lt;/h2&gt;
+
+    &lt;i&gt;Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}&lt;/i&gt;
+
+    &lt;div class="well"&gt;
+        {{ advert.content }}
+    &lt;/div&gt;
+
+    &lt;p&gt;
+        &lt;a href="{{ path('oc_platform_home') }}" class="btn btn-default"&gt;
+            &lt;i class="glyphicon glyphicon-chevron-left"&gt;&lt;/i&gt;
+        Retour à la liste
+        &lt;/a&gt;
+
+        &lt;a href="{{ path('oc_platform_edit', {'id': advert.id}) }}" class="btn btn-default"&gt;
+            &lt;i class="glyphicon glyphicon-edit"&gt;&lt;/i&gt;
+        Modifier l'annonce
+        &lt;/a&gt;
+
+        &lt;a href="{{ path('oc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger"&gt;
+            &lt;i class="glyphicon glyphicon-trash"&gt;&lt;/i&gt;
+        Supprimer l'annonce
+        &lt;/a&gt;
+    &lt;/p&gt;
+
+{% endblock %}
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>520</y>
+      <w>167</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>CONTROLLER 
+
+AdvertController
+
+OC/PlatformBundle/Controller/AdvertController
+
+
+
+--
+
+&lt;?php
+// src/OC/PlatformBundle/Controller/AdvertController.php
+namespace OC\PlatformBundle\Controller;                             // Appartient a l'environement "OCPlatformBundle" (sont namesapce).
+
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;           // Notre contrôleur hérite du contrôleur de base de Symfony.
+use Symfony\Component\HttpFoundation\Request;                       // Pour récupérer la requête depuis un contrôleur.
+use Symfony\Component\HttpFoundation\Response;                      // Pour retourner une réponse depuis un contrôleur.
+use Symfony\Component\HttpFoundation\RedirectResponse;              // Methode RedirectResponse permet les redirections.
+use Symfony\Component\HttpFoundation\JsonResponse;                  // Methode permetant d'encoder grâce à la méthodejson_encode , puis définir le bonContent-Type 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;      // Cette use donne accès à 1 méthode raccourcie pour générer des routes avec méthode generate UrlGeneratorInterface.
+
+
+class AdvertController extends Controller
+{
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  MENU
+    public function menuAction($limit)
+    {
+                                                                                                            // On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
+        $listAdverts = array(
+            array('id' =&gt; 2, 'title' =&gt; 'Recherche développeur Symfony'),
+            array('id' =&gt; 5, 'title' =&gt; 'Mission de webmaster'),
+            array('id' =&gt; 9, 'title' =&gt; 'Offre de stage webdesigner')
+        );
+
+        return $this-&gt;render('OCPlatformBundle:Advert:menu.html.twig', array('listAdverts' =&gt; $listAdverts) // Tout l'intérêt est ici : le contrôleur passe les variables nécessaires au template !
+        );
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  INDEX
+    public function indexAction()
+    {
+        // Notre liste d'annonce en dur
+        $listAdverts = array(
+                array(
+                    'title'   =&gt; 'Recherche développpeur Symfony',
+                    'id'      =&gt; 1,
+                    'author'  =&gt; 'Alexandre',
+                    'content' =&gt; 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+                    'date'    =&gt; new \Datetime()),
+                array(
+                    'title'   =&gt; 'Mission de webmaster',
+                    'id'      =&gt; 2,
+                    'author'  =&gt; 'Hugo',
+                    'content' =&gt; 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+                    'date'    =&gt; new \Datetime()),
+                array(
+                    'title'   =&gt; 'Offre de stage webdesigner',
+                    'id'      =&gt; 3,
+                    'author'  =&gt; 'Mathieu',
+                    'content' =&gt; 'Nous proposons un poste pour webdesigner. Blabla…',
+                    'date'    =&gt; new \Datetime())
+        );
+
+        // Et modifiez le 2nd argument pour injecter notre liste
+        return $this-&gt;render('OCPlatformBundle:Advert:index.html.twig', array(
+            'listAdverts' =&gt; $listAdverts
+        ));
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  VIEW
+    public function viewAction($id)
+    {
+        // Ici, on récupérera l'annonce correspondante à l'id $id
+        $advert = array(
+            'title'   =&gt; 'Recherche développpeur Symfony2',
+            'id'      =&gt; $id,
+            'author'  =&gt; 'Alexandre',
+            'content' =&gt; 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+            'date'    =&gt; new \Datetime()
+        );
+
+        return $this-&gt;render('OCPlatformBundle:Advert:view.html.twig', array(
+            'advert' =&gt; $advert
+        ));
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  ADD
+    public function addAction(Request $request)
+    {
+        // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
+
+        // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
+        if ($request-&gt;isMethod('POST')) {
+          // Ici, on s'occupera de la création et de la gestion du formulaire
+
+          $request-&gt;getSession()-&gt;getFlashBag()-&gt;add('notice', 'Annonce bien enregistrée.');
+
+          // Puis on redirige vers la page de visualisation de cettte annonce
+          return $this-&gt;redirectToRoute('oc_platform_view', array('id' =&gt; 5));
+        }
+
+        // Si on n'est pas en POST, alors on affiche le formulaire
+        return $this-&gt;render('OCPlatformBundle:Advert:add.html.twig');
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  EDIT
+    public function editAction($id, Request $request)
+    {
+        // ...
+
+        $advert = array(
+            'title'   =&gt; 'Recherche développpeur Symfony',
+            'id'      =&gt; $id,
+            'author'  =&gt; 'Alexandre',
+            'content' =&gt; 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+            'date'    =&gt; new \Datetime()
+        );
+
+        return $this-&gt;render('OCPlatformBundle:Advert:edit.html.twig', array(
+            'advert' =&gt; $advert
+        ));
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////  DELETE
+    public function deleteAction($id)
+    {
+        // Ici, on récupérera l'annonce correspondant à $id
+
+        // Ici, on gérera la suppression de l'annonce en question
+
+        return $this-&gt;render('OCPlatformBundle:Advert:delete.html.twig');
+    }
+
+
+    
+}
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>949</x>
+      <y>419</y>
+      <w>105</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>Les templates finaux
+
+MENU
+
+OC/PlatformBundle/Resources/views/Advert/menu.html.twig
+
+--
+
+{# src/OC/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+
+{# Ce template n'hérite de personne,
+   tout comme le template inclus avec {{ include() }}. #}
+
+&lt;ul class="nav nav-pills nav-stacked"&gt;
+
+    {% for advert in listAdverts %}
+
+        &lt;li&gt;
+            &lt;a href="{{ path('oc_platform_view', {'id': advert.id}) }}"&gt;{{ advert.title }}&lt;/a&gt;
+        &lt;/li&gt;
+
+    {% endfor %}
+
+&lt;/ul&gt;
+
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>625</x>
+      <y>332</y>
+      <w>469</w>
+      <h>589</h>
+    </coordinates>
+    <panel_attributes>OC/PlatformBundle/Ressources/views
+
+
+
+--
+
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>295</x>
+      <y>291</y>
+      <w>836</w>
+      <h>663</h>
+    </coordinates>
+    <panel_attributes>OC/PlatformBundle
+
+
+
+--
+
+fg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>794</x>
+      <y>392</y>
+      <w>278</w>
+      <h>511</h>
+    </coordinates>
+    <panel_attributes>OC/PlatformBundle/Ressources/views/Advert
+
+
+
+--
+
+fg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,7 +1,7 @@
 # src/OC/PlatformBundle/Resources/config/routing.yml
 
 
-# Page d'accueil:
+# Page d'accueil -----------------------------------------index:
 oc_platform_home:
     path:      /{page}
     defaults:
@@ -11,7 +11,7 @@ oc_platform_home:
         page: \d*
 
 
-# Page de visualisation d'une annonce:
+# Page de visualisation d'une annonce ---------------------view:
 oc_platform_view:
     path:      /advert/{id}
     defaults:
@@ -20,14 +20,14 @@ oc_platform_view:
         id: \d+
 
 
-# Page ajout:
+# Page ajout ----------------------------------------------add:
 oc_platform_add:
     path:      /add
     defaults:
         _controller: OCPlatformBundle:Advert:add
 
 
-# Page  modification:
+# Page  modification --------------------------------------edit:
 oc_platform_edit:
     path:      /edit/{id}
     defaults:
@@ -36,7 +36,7 @@ oc_platform_edit:
         id: \d+
 
 
-# Page suppression:
+# Page suppression ----------------------------------------delete:
 oc_platform_delete:
     path:      /delete/{id}
     defaults:
@@ -46,9 +46,15 @@ oc_platform_delete:
 
 
 
-###############################################################
-#     AUTRES ROUTES
-###############################################################
+
+
+
+
+##############################################################################################################################
+##############################################################################################################################
+#                                               AUTRES ROUTES TEST
+##############################################################################################################################
+##############################################################################################################################
 
 # Page session:
 oc_platform_session:
@@ -56,14 +62,15 @@ oc_platform_session:
     defaults:
         _controller: OCPlatformBundle:Advert:session
 
-###############################################################
+
+##############################################################################################################################
 # Page custom test:
 oc_platform_CroCombo:
     path:     /croco
     defaults: { _controller: OCPlatformBundle:Advert:test }
 
 
-###############################################################
+##############################################################################################################################
 oc_platform_view_slug:
     path:      /{year}/{slug}.{format}
     defaults: 
@@ -74,6 +81,8 @@ oc_platform_view_slug:
         format: html|xml|buz
         _locale: fr
 
+
+##############################################################################################################################
 oc_platform_myRoute:
     path:      /myRoute/{id}
     defaults: { _controller: OCPlatformBundle:Advert:myRoute }
@@ -86,7 +95,8 @@ oc_platform_myRoute:
 #Le paramètre {_locale} Lorsqu'il est utilisé, il définit la langue dans laquelle l'utilisateur souhaite obtenir la page. Ainsi, si vous avez défini des fichiers de traduction ou si vous employez des bundles qui en utilisent, alors les traductions dans la langue du paramètre{_locale}seront chargées. Pensez à mettre unrequirements:sur la valeur de ce paramètre pour éviter que vos utilisateurs ne demandent le russe alors que votre site n'est que bilingue français-anglais.
 
 #Le paramètre {_controller} Cette valeur que nous avons toujours mise dans le tableau defaults n'est rien d'autre qu'un paramètre de route ! Évidemment, c'est un paramètre que nous ne mettons jamais dans le path de nos routes, mais je tenais à vous montrer qu'il n'est pas différent des autres. Le tableau defaults correspond juste aux valeurs par défaut de nos paramètres, qu'ils soient ou non présent dans lepath  de la route.
-###############################################################
+##############################################################################################################################
+
 
 # Page de visualisation testResponse:
 oc_platform_response:
@@ -96,6 +106,8 @@ oc_platform_response:
     requirements:
         id: \d+
 
+
+##############################################################################################################################
 
 
 
