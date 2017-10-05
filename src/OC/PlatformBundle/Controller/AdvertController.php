@@ -96,6 +96,23 @@ class AdvertController extends Controller
 ///////////////////////////////////////////////////////////////////////////////////////  ADD
     public function addAction(Request $request)
     {
+
+
+        // On récupère le service
+        $antispam = $this->container->get('oc_platform.antispam');
+
+        // Je pars du principe que $text contient le texte d'un message quelconque
+        $text1 = 'bla bla bla...';                                                                                                  // test  text < 50 carract
+        $text2 = 'bla bla bla.lkndgtkd pdjkp ojkjijli kmlk,efk^ofkleklfplzefplz akêklrzôrklzoe oze kllpzfeklẑkofô p  ùqzpd zfe';    // test  text > 50 carract
+        if ($antispam->isSpam($text2)) {
+          throw new \Exception('Votre message a été détecté comme spam !');
+        }
+        $test = '=> OK !! Le msg n\'est pas un spam <=';
+        // Ici le message n'est pas un spam
+
+
+
+
         // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
         // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
         if ($request->isMethod('POST')) {
@@ -107,7 +124,18 @@ class AdvertController extends Controller
           return $this->redirectToRoute('oc_platform_view', array('id' => 5));
         }
         // Si on n'est pas en POST, alors on affiche le formulaire
-        return $this->render('OCPlatformBundle:Advert:add.html.twig');
+        return $this->render('OCPlatformBundle:Advert:add.html.twig', array('msg' => $test) );
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

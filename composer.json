@@ -1,4 +1,5 @@
 {
+
     "name": "eeebuntu/symf",
     "license": "proprietary",
     "type": "project",
@@ -11,6 +12,9 @@
             "app/AppCache.php"
         ]
     },
+
+
+
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
@@ -19,6 +23,9 @@
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
+
+
+
     "require": {
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
@@ -30,12 +37,19 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^1.0||^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.4"
     },
+
+
+
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
+
+
+
     "scripts": {
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -52,9 +66,15 @@
             "@symfony-scripts"
         ]
     },
+
+
+
     "config": {
         "sort-packages": true
     },
+
+
+
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
@@ -67,4 +87,7 @@
         },
         "branch-alias": null
     }
+
+
+
 }
