@@ -1,0 +1,9 @@
+oc_core_homepage:
+# Page custom test:
+    path:     /
+    defaults: { _controller: OCCoreBundle:Core:indexPerso }
+
+oc_core_contact:
+# Page custom test:
+    path:     /contact
+    defaults: { _controller: OCCoreBundle:Core:contact }

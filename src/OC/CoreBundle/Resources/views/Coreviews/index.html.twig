@@ -1,0 +1,61 @@
+{# src/OC/CoreBundle/Resources/views/Coreviews/index.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony OCR</title>
+    <link href="https://www.quackit.com/html/templates/download/bootstrap/business-2/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        .navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus 
+        {
+            color: #e16c6c;
+        }
+        li 
+        {
+        list-style-type: none;
+        }
+    </style>
+   </head>
+   <body>
+
+
+    {# Inclusion du menu #}
+    {{ include("OCCoreBundle:Coreviews:menu.html.twig") }}
+
+      <!-- Header -->
+      <header>
+         <div class="header-content">
+            <div class="header-content-inner">
+                <h1>{{ msg1 }}<br>{{ msg2 }}</h1>
+                <hr style="width: 30%;">
+                <p>
+                    Dans une application Symfony, il est très courant de créer un CoreBundle <br/>(ou tout autre nom qui vous fait plaisir). Le rôle d’un tel bundle est de faire le lien entre tous les autres bundles utilisés, les vôtres comme ceux que vous avez pu télécharger grâce à Composer...
+                </p>
+                <hr style="width: 30%;">
+
+
+                {# Recuperation des annonces codées en dure depuis le contrôleur #}
+                <h2>Liste des dernières annonces :</h2>
+
+                <ul>
+                    {% for advert in listAdverts %}
+                        <li>
+                            <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">{{ advert.title|upper }}<br></a>le {{ advert.date|date('d/m/Y') }} (par {{ advert.author }})
+                        </li>
+                    {% else %}
+                        <li>Pas (encore !) d'annonces</li>
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+         </div>
+      </header>
+
+      <body>
+   </body>
+</html>

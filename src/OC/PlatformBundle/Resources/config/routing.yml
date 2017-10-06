@@ -20,11 +20,13 @@ oc_platform_view:
         id: \d+
 
 
+
 # Page ajout ----------------------------------------------add:
 oc_platform_add:
     path:      /add
     defaults:
         _controller: OCPlatformBundle:Advert:add
+
 
 
 # Page  modification --------------------------------------edit:
@@ -34,6 +36,7 @@ oc_platform_edit:
         _controller: OCPlatformBundle:Advert:edit
     requirements:
         id: \d+
+
 
 
 # Page suppression ----------------------------------------delete:
@@ -63,12 +66,6 @@ oc_platform_session:
         _controller: OCPlatformBundle:Advert:session
 
 
-##############################################################################################################################
-# Page custom test:
-oc_platform_CroCombo:
-    path:     /croco
-    defaults: { _controller: OCPlatformBundle:Advert:test }
-
 
 ##############################################################################################################################
 oc_platform_view_slug:
@@ -80,6 +77,7 @@ oc_platform_view_slug:
         year:   \d{4}
         format: html|xml|buz
         _locale: fr
+
 
 
 ##############################################################################################################################
@@ -96,6 +94,7 @@ oc_platform_myRoute:
 
 #Le paramètre {_controller} Cette valeur que nous avons toujours mise dans le tableau defaults n'est rien d'autre qu'un paramètre de route ! Évidemment, c'est un paramètre que nous ne mettons jamais dans le path de nos routes, mais je tenais à vous montrer qu'il n'est pas différent des autres. Le tableau defaults correspond juste aux valeurs par défaut de nos paramètres, qu'ils soient ou non présent dans lepath  de la route.
 ##############################################################################################################################
+
 
 
 # Page de visualisation testResponse:

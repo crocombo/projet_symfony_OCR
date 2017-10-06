@@ -1,4 +1,4 @@
-{# app/Resources/views/layout.html.twig #}
+{# src/OC/CoreBundle/Ressources/views/layout.html.twig #}
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +14,12 @@
     </head>
 
     <body>
+
+
+    {# Inclusion du menu #}
+    {{ include("OCCoreBundle:Coreviews:menu.html.twig") }}
+
+
     <div class="container">
 
         <div id="header" class="jumbotron">

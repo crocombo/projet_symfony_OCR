@@ -1,5 +1,6 @@
 <?php
 // src/OC/PlatformBundle/Controller/AdvertController.php
+
 namespace OC\PlatformBundle\Controller;                             // Appartient a l'environement "OCPlatformBundle" (sont namesapce).
 
 
@@ -126,16 +127,6 @@ class AdvertController extends Controller
         // Si on n'est pas en POST, alors on affiche le formulaire
         return $this->render('OCPlatformBundle:Advert:add.html.twig', array('msg' => $test) );
 
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -178,20 +169,6 @@ class AdvertController extends Controller
 //****************************************************************************************************************************************
 //****************************************************************************************************************************************
 //****************************************************************************************************************************************
-
-
-
-    # Action test ---------------------------------------------------------------------------------------
-    public function testAction()
-    {
-        $content = $this->get('templating')->render('OCPlatformBundle:Advert:index_test.html.twig', array(
-            'nom' => 'Cro',
-            'prenom' => 'Combo'
-        ))
-    ;
-    return new Response($content);
-    }
-
 
 
     # Action session ---------------------------------------------------------------------------------------
