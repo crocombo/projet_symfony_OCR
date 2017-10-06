@@ -31,6 +31,7 @@ class CoreController extends Controller
     public function indexPersoAction()
     {
 
+
         // Notre liste d'annonce en dur
         $listAdverts = array(
                 array(
@@ -69,11 +70,19 @@ class CoreController extends Controller
 
 
 
-    # ---------------------------------------------------------------------------------------CONTACT
-    public function contactAction()
-    {
 
-        return $this->render('OCCoreBundle:Coreviews:contact.html.twig');
+    # ---------------------------------------------------------------------------------------CONTACT
+    public function contactAction(Request $request)
+    {
+    
+        //variable de session pour le message flashbag:
+        $session = $request->getSession();
+        $session->getFlashBag()->add('info', 'Page de contact non disponible, merci de revenir plus tard.');
+        // Puis on redirige vers la page de visualisation de cette annonce
+        
+        return $this->redirectToRoute('oc_core_homepage');
+        #return $this->render('OCCoreBundle:Coreviews:contact.html.twig');
+        
     }
 
 
