@@ -51,18 +51,12 @@ class CoreController extends Controller
                     'id'      => 3,
                     'author'  => 'Mathieu',
                     'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
-                    'date'    => new \Datetime()),
-                array(
-                    'title'   => 'Offre divers',
-                    'id'      => 4,
-                    'author'  => 'Croco',
-                    'content' => 'Nous proposons un poste en qualité d\'integrateur web ayant de bonnes notions avec le framwork Symfony. Blabla…',
                     'date'    => new \Datetime())
         );
 
         return $this->render('OCCoreBundle:Coreviews:index.html.twig', array(
             'listAdverts' => $listAdverts,
-            'msg1' => 'Activité  #1',
+            'msg1' => 'Activité  <span style="color: red;">#1</span>',
             'msg2' => 'CoreBundle'
         ));
     }

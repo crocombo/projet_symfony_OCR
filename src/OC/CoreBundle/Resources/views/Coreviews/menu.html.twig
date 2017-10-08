@@ -28,7 +28,7 @@
                     </a>  
                 </li>
                 
-                <li {% if app.request.attributes.get('_route') == 'oc_core_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_core_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Home</a></li>
+                <li {% if app.request.attributes.get('_route') == 'oc_core_homepage'  %}class="active"{% endif %}><a href="{{ path('oc_core_homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="navbarCoulor">Accueil</a></li>
                 <li {% if app.request.attributes.get('_route') == 'oc_platform_home'  %}class="active"{% endif %}><a href="{{ path('oc_platform_home') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> <span class="navbarCoulor">Platform</a></li>
                 <li {% if app.request.attributes.get('_route') == 'oc_core_contact'  %}class="active"{% endif %}><a href="{{ path('oc_core_contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span class="navbarCoulor">Contact</a></li>
             </ul>

@@ -21,13 +21,12 @@
     {# Inclusion du menu #}
     {{ include("OCCoreBundle:Coreviews:menu.html.twig") }}
 
-S
+
     <!-- Header -->
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>{{ msg1 }}<br>{{ msg2 }}</h1>
-                <hr style="width: 30%;">
+                <h1>{{ msg1|raw }}<br>{{ msg2 }}</h1>
                 
                 
                 {# AFFICHAGE MSG FLASHBAG #}
@@ -48,25 +47,26 @@ S
                 </div>
                 
                             
-                <p>
+                <i>
                     Dans une application Symfony, il est très courant de créer un CoreBundle <br/>(ou tout autre nom qui vous fait plaisir). Le rôle d’un tel bundle est de faire le lien entre tous les autres bundles utilisés, les vôtres comme ceux que vous avez pu télécharger grâce à Composer...
-                </p>
-                <hr style="width: 30%;">
+                </i>
+                <hr style="width: 70%;">
                 
 
                 {# Recuperation des annonces codées en dure dans [array] depuis le contrôleur... #}
                 <h2>Dernières annonces :</h2>
-
+                <br>
                 <ul>
                     {% for advert in listAdverts %}
                         <li>
-                            <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">{{ advert.title|upper }}<br></a>le {{ advert.date|date('d/m/Y') }} (par {{ advert.author }})
+                            <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">{{ advert.title|upper }} /</a> le {{ advert.date|date('d/m/Y') }} (par {{ advert.author }})
                         </li>
+                        <br>
                     {% else %}
                         <li>Pas (encore !) d'annonces</li>
                     {% endfor %}
                 </ul>
-             
+                <hr style="width: 70%;">
             </div>                  
         </div>
        
