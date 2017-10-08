@@ -46,12 +46,4 @@ php bin/console assets:install web
 
 ****************************************************************
 
-Pages test existantes:
-======================
-projet_symfony_OCR/web/app_dev.php/
-
-projet_symfony_OCR/web/app_dev.php/hello-world
-
-projet_symfony_OCR/web/app_dev.php/next1
-projet_symfony_OCR/web/app_dev.php/next2
 
