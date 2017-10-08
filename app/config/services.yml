@@ -15,3 +15,11 @@ services:
         public: false
 
 
+
+
+
+# service pour changer page 404
+#    CoreBundle\Controller\CustomExceptionController:
+#        public: true
+#        arguments:
+#            $debug: '%kernel.debug%'

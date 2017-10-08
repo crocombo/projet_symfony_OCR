@@ -38,6 +38,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+#    exception_controller: 'CoreBundle:Exception:showException'
 
 # Doctrine Configuration
 doctrine:

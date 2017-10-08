@@ -13,12 +13,6 @@
             </button>
             <a class="navbar-brand" href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony" target="_blank"><span class="glyphicon glyphicon-fire"></span>OCR</a>
             <a class="navbar-brand" href="https://github.com/crocombo/projet_symfony_OCR" target="_blank"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <span class="navbarCoulor">My GitHub</a></li>
-            
-
-
-
-    
-        
         </div>
 
 
@@ -29,9 +23,7 @@
                 {# msg flasbag #}
                 <li><a href="#">
                     <span style="color: red;">
-                        {% for message in app.session.flashbag.get('info') %}
-                            <strong>{{ message }}</strong>
-                        {% endfor %}
+
                     </span>
                     </a>  
                 </li>
