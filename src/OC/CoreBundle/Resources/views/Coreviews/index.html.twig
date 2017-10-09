@@ -50,23 +50,39 @@
                 <i>
                     Dans une application Symfony, il est très courant de créer un CoreBundle <br/>(ou tout autre nom qui vous fait plaisir). Le rôle d’un tel bundle est de faire le lien entre tous les autres bundles utilisés, les vôtres comme ceux que vous avez pu télécharger grâce à Composer...
                 </i>
-                <hr style="width: 70%;">
+                <hr style="width: 30%;">
                 
-
-                {# Recuperation des annonces codées en dure dans [array] depuis le contrôleur... #}
-                <h2>Dernières annonces :</h2>
-                <br>
-                <ul>
-                    {% for advert in listAdverts %}
-                        <li>
-                            <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">{{ advert.title|upper }} /</a> le {{ advert.date|date('d/m/Y') }} (par {{ advert.author }})
-                        </li>
+                
+                {# Recuperation des annonces #}
+                <div class="row">
+                
+                    <div class="col-md-6">
+                        {# Recuperation des annonces codées en dure dans [array] depuis CoreContrôleur... #}
+                        <h2>Dernières annonces depuis <span style="color:red; text-decoration: underline">CoreContrôleur</span></h2>
                         <br>
-                    {% else %}
-                        <li>Pas (encore !) d'annonces</li>
-                    {% endfor %}
-                </ul>
-                <hr style="width: 70%;">
+                                               
+                        <ul class="nav nav-pills nav-stacked">
+                            {% for advert in listAdverts %}
+                                <li>
+                                    <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">{{ advert.title|upper }}</a>{# le {{ advert.date|date('d/m/Y') }} (par {{ advert.author }}) #}
+                                </li>
+                                <br>
+                            {% else %}
+                                <li>Pas (encore !) d'annonces</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        {# Recuperation des annonces codées en dure dans [array] depuis AdvertContrôleur... #}
+                        <h2>Dernières annonces depuis <span style="color:red; text-decoration: underline">AdvertContrôleur</span></h2>
+                        <br>                 
+                         {{ render(controller("OCPlatformBundle:Advert:menu", {'limit': 3} ) ) }}                    
+                    </div>
+                    
+                </div>{# Fin div row #}                 
+                
+                <hr style="width: 30%;">
             </div>                  
         </div>
        

@@ -59,6 +59,8 @@ class CoreController extends Controller
             'msg1' => 'Activité  <span style="color: red;">#1</span>',
             'msg2' => 'CoreBundle'
         ));
+        
+        
     }
 
 
