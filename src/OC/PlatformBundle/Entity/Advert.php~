@@ -12,21 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advert
 {
-
-    // PERMET DE CREER LA DATE DIRECTEMENT DEPUIS LE CONSTRUCTEUR
-    public function __construct()
-        {
-        // Par défaut, la date de l'annonce est la date d'aujourd'hui
-        $this->date = new \Datetime();
-        }
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////// LISTE ATTRIBUTS  ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////// Id
     /**
      * @var int
      *
@@ -36,7 +21,6 @@ class Advert
      */
     private $id;
 
-/////////////////////////////////////////////////////////////////////////// date
     /**
      * @var \DateTime
      *
@@ -44,7 +28,6 @@ class Advert
      */
     private $date;
 
-/////////////////////////////////////////////////////////////////////////// title
     /**
      * @var string
      *
@@ -52,7 +35,6 @@ class Advert
      */
     private $title;
 
-/////////////////////////////////////////////////////////////////////////// author
     /**
      * @var string
      *
@@ -60,7 +42,6 @@ class Advert
      */
     private $author;
 
-/////////////////////////////////////////////////////////////////////////// content
     /**
      * @var string
      *
@@ -68,18 +49,7 @@ class Advert
      */
     private $content;
 
-/////////////////////////////////////////////////////////////////////////// published
-    /**
-    * @ORM\Column(name="published", type="boolean")
-    */
-    private $published = true;
 
-
-///////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////// GETER & SETER  /////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////// ID
     /**
      * Get id
      *
@@ -90,7 +60,6 @@ class Advert
         return $this->id;
     }
 
-/////////////////////////////////////////////////////////////////////////// date
     /**
      * Set date
      *
@@ -115,7 +84,6 @@ class Advert
         return $this->date;
     }
 
-/////////////////////////////////////////////////////////////////////////// title
     /**
      * Set title
      *
@@ -140,7 +108,6 @@ class Advert
         return $this->title;
     }
 
-/////////////////////////////////////////////////////////////////////////// author
     /**
      * Set author
      *
@@ -165,7 +132,6 @@ class Advert
         return $this->author;
     }
 
-/////////////////////////////////////////////////////////////////////////// content
     /**
      * Set content
      *
@@ -190,30 +156,11 @@ class Advert
         return $this->content;
     }
 
-/////////////////////////////////////////////////////////////////////////// published
-    /**
-     * Set published
-     *
-     * @param boolean $published
-     *
-     * @return Advert
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-
-        return $this;
-    }
 
     /**
-     * Get published
-     *
-     * @return boolean
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
+    * @ORM\Column(name="published", type="boolean")
+    */
+    private $published = true;
 
 }
+
