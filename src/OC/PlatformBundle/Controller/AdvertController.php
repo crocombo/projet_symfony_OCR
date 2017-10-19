@@ -6,6 +6,7 @@ namespace OC\PlatformBundle\Controller;                             // Appartien
 
 use OC\PlatformBundle\Entity\Advert;                                // Permer de lier les entités Advert.
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;           // Notre contrôleur hérite du contrôleur de base de Symfony.
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;   // Permet de charger dans le Profiler le msg d'erreur.
 use Symfony\Component\HttpFoundation\Request;                       // Pour récupérer la requête depuis un contrôleur.
 use Symfony\Component\HttpFoundation\Response;                      // Pour retourner une réponse depuis un contrôleur.
 use Symfony\Component\HttpFoundation\RedirectResponse;              // Methode RedirectResponse permet les redirections.
@@ -80,16 +81,24 @@ class AdvertController extends Controller
 ///////////////////////////////////////////////////////////////////////////////////////  VIEW
     public function viewAction($id)
     {
-        // Ici, on récupérera l'annonce correspondante à l'id $id
-        $advert = array(
-            'title'   => 'Recherche développpeur Symfony2',
-            'id'      => $id,
-            'author'  => 'Alexandre',
-            'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-            'date'    => new \Datetime()
-        );
+        // On récupère le repository
+        $repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Advert');
+
+        // On récupère l'entité correspondante à l'id $id
+        $advert = $repository->find($id);
+
+        // Autre syntaxe pour faire la même chose directement depuis l'EntityManager. Il s'agit de la méthode find de l'EntityManager, et non du pository:
+        //$advert = $this->getDoctrine()->getManager()->find('OCPlatformBundle:Advert', $id);
+
+        // $advert est donc une instance de OC\PlatformBundle\Entity\Advert
+        // ou null si l'id $id  n'existe pas, d'où ce if :
+        if (null === $advert) {
+          throw new NotFoundHttpException("Yop mdr t'est a l'ouest car l'annonce d'id ".$id." n'existe pas.");
+        }
+
+        // Le render ne change pas, on passait avant un tableau, maintenant un objet
         return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-            'advert' => $advert
+          'advert' => $advert
         ));
     }
 
@@ -119,9 +128,9 @@ class AdvertController extends Controller
 
         // Création de l'entité
         $advert = new Advert();
-        $advert->setTitle('Recherche développeur Symfony.');
-        $advert->setAuthor('Alexandre');
-        $advert->setContent("Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…");
+        $advert->setTitle('Recherche dev PHP mysql');
+        $advert->setAuthor('Croco');
+        $advert->setContent("Cherche dev PHP mysql");
         // On peut ne pas définir ni la date ni la publication,
         // car ces attributs sont définis automatiquement dans le constructeur
 
